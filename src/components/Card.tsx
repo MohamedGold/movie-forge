@@ -285,6 +285,8 @@ export default function Card(props: Props) {
   const withPlay = props.withPlay ?? true
   const [isLongPress, setIsLongPress] = useState(false)
   const pressTimerRef = useRef<NodeJS.Timeout | null>(null)
+  // loading
+    const [loading, setLoading] = useState(true)
 
   // الحصول على التصنيفات من الـ globalContext
   const { genres } = useGlobalContext()
@@ -402,7 +404,7 @@ export default function Card(props: Props) {
             </button>
           </div>
         ) : null}
-        <Image className="test" alt="" src={props.imageSrc} />
+        <Image  className="test" alt="" src={props.imageSrc} />
 
         {/* العناصر المضافة: التقييم، التصنيفات، وعدد المشاهدات **/}
         {props.cardType !== 'cast' &&

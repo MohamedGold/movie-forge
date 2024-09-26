@@ -24,7 +24,7 @@ export default function Image(props: Props) {
           className="w-full  h-full   object-cover"
         />
       ) : (
-       <div className=' flex flex-1 items-center justify-center h-full '>
+       <div className=' flex flex-1 w-[100px] mx-auto items-center justify-center h-full '>
         <ImageSrc className=' ' src={Notfound} alt="" />
        </div>
       )}

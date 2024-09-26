@@ -50,7 +50,7 @@ export default function SearchResults(props: Props) {
           <Image
             alt=""
             src={tmdbImageSrc(film.posterPath)}
-            className="h-[72px] min-h-[72px] mobile:max-w-[150px]  max-h-[72px] max-w-[102px] min-w-[102px] w-[102px] rounded-md"
+            className="h-[72px] min-h-[72px]  mobile:max-w-[150px]  max-h-[72px] max-w-[102px] min-w-[102px] w-[102px] rounded-md"
           ></Image>
           {/* title and genres */}
           <div className="px-3 mobile:text-center truncate">
