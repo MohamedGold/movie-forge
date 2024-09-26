@@ -148,7 +148,7 @@ export default function RootLayout({
   return (
     <GlobalContext.Provider value={{ genres }}>
       <Header />
-      <main className="pb-[65px]  min-h-screen   ">{children}</main>
+      <main className="pb-[65px]  ">{children}</main>
       <Footer />
 
       {/* Scroll to Top Button */}

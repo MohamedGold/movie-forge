@@ -73,7 +73,7 @@ export default function Header() {
   }, [onWindowClick]) // Added onWindowClick as a dependency
 
   return (
-    <div className="bg-header sticky top-0 left-0 right-0 z-[99] ">
+    <div className="bg-header sticky  top-0 left-0 right-0 z-[99] ">
       <Container className="flex items-center mobile:flex-wrap mobile:justify-evenly  justify-between gap-3  ">
         {/* brand & menu */}
         <div className="flex items-center gap-6">

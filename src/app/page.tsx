@@ -16,8 +16,8 @@ import {
 // import Film from '@/components/Film'
 import { isFilm, mergeFilms, tmdbImageSrc } from '@/utilts'
 import TrailerModal from '@/components/TrailerModal'
-import { MdPlayCircleOutline } from 'react-icons/md';
-import { useGlobalContext } from './RootLayout';
+import { MdPlayCircleOutline } from 'react-icons/md'
+import { useGlobalContext } from './RootLayout'
 
 export default function Home() {
   const router = useRouter()
@@ -31,7 +31,6 @@ export default function Home() {
   const [trailerModelSrc, setTrailerModelSrc] = useState('')
 
   const globalContext = useGlobalContext()
-
 
   const playTrailer = async (film: Film) => {
     const trailers = await getTrailers(film.mediaType, film.id)
@@ -77,6 +76,17 @@ export default function Home() {
   const goToDetailPage = (film: Film) => {
     router.push(`/${film.mediaType}/${film.id}`)
   }
+
+  // scroll to top
+  const scrollToTop = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth',
+    })
+  }
+
+  //load on top
+  const loadOnTop = () => {}
 
   return (
     <>
@@ -173,6 +183,8 @@ export default function Home() {
         title="Top Rated TV"
         hidden={topRatedTv.length === 0}
         onTitleClick={() => router.push(`/list/top-rated-tv`)}
+        viewMoreButton={true}
+        onViewMoreClick={() => router.push(`/list/top-rated-tv`)}
       >
         <Slider isMoviesCard={true}>
           {(_) =>
@@ -197,6 +209,8 @@ export default function Home() {
         hidden={topRatedMovie.length === 0}
         onTitleClick={() => router.push(`/list/top-rated-movies`)}
         title="Top Rated Movies"
+        viewMoreButton={true}
+        onViewMoreClick={() => router.push(`/list/top-rated-movies`)}
       >
         <Slider isMoviesCard={true}>
           {(_) =>
