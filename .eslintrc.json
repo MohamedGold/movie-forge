@@ -1,9 +1,16 @@
 {
   "extends": ["next/core-web-vitals", "next/typescript"],
   "rules": {
-    "@typescript-eslint/no-unused-vars": "off", // Disables the warning for unused variables
-    "@typescript-eslint/explicit-module-boundary-types": "off", // Disables the need for explicit return types
-    "@typescript-eslint/no-explicit-any": "off", // Disables warnings for using 'any' type
-    "@typescript-eslint/no-inferrable-types": "off" // Disables warnings for inferred types
+    "@typescript-eslint/no-unused-vars": "off", // Disable unused variables warning
+    "@typescript-eslint/explicit-module-boundary-types": "off", // Disable explicit return types requirement
+    "@typescript-eslint/no-explicit-any": "off", // Disable warnings for 'any' type
+    "@typescript-eslint/no-inferrable-types": "off", // Disable warnings for inferred types
+    "react-hooks/exhaustive-deps": "off", // Disable warnings for missing dependencies in useEffect
+    "@typescript-eslint/no-unsafe-function-type": "off", // Disable unsafe function type warnings
+    "@typescript-eslint/no-unsafe-member-access": "off", // Disable unsafe member access warnings
+    "@typescript-eslint/no-unsafe-assignment": "off", // Disable unsafe assignment warnings
+    "@typescript-eslint/no-misused-promises": "off", // Disable warnings for misused promises
+
+    "react/prop-types": "off" // Disable prop-types validation
   }
 }

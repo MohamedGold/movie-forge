@@ -276,7 +276,7 @@ interface Props extends CustomComponentProps {
   views?: number // إضافة عدد المشاهدات
   onClick?: () => void
   withPlay?: boolean
-  mediaType: MediaType // نوع الوسائط (فيلم/مسلسل)
+  mediaType: MediaType  // نوع الوسائط (فيلم/مسلسل)
   releaseDate: string
   cardType?: 'default' | 'cast' | 'season' | 'trailer' // Add a cardType prop
 }

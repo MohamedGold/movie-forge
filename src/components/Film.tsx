@@ -150,10 +150,13 @@ const formatNumber = (number:number ) => {
           <div className="flex items-center gap-3 w-max">
             {casts.map((cast, i) => (
               <div key={i} className="flex-shrink-0  w-[240px] mb-6  ">
+                
                 <Card
                   withPlay={false}
                   imageSrc={tmdbImageSrc(cast.profilePath)}
                   cardType='cast'
+                  mediaType={film.mediaType}
+                  releaseDate={film.releaseDate}
                 >
                   <p className="font-semibold text-center"> {cast.name}</p>
                   <p className="opacity-[0.9] text-sm text-center">
@@ -181,6 +184,8 @@ const formatNumber = (number:number ) => {
                 imageSrc={youtubeThubnail(trailer.key)}
                 className="flex-shrink-0 w-[300px] mb-6 rounded-lg overflow-hidden  "
                 cardType='trailer'
+                mediaType={film.mediaType}
+                releaseDate={film.releaseDate}
               ></Card>
             ))}
           </div>
@@ -210,6 +215,8 @@ const formatNumber = (number:number ) => {
                 imageSrc={tmdbImageSrc(season.posterPath)}
                 key={i}
                 cardType='season'
+                mediaType={film.mediaType}
+                releaseDate={film.releaseDate}
               ></Card>
             ))
           }
