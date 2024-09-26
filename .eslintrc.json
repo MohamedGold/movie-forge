@@ -1,0 +1,9 @@
+{
+  "extends": ["next/core-web-vitals", "next/typescript"],
+  "rules": {
+    "@typescript-eslint/no-unused-vars": "off", // Disables the warning for unused variables
+    "@typescript-eslint/explicit-module-boundary-types": "off", // Disables the need for explicit return types
+    "@typescript-eslint/no-explicit-any": "off", // Disables warnings for using 'any' type
+    "@typescript-eslint/no-inferrable-types": "off" // Disables warnings for inferred types
+  }
+}
