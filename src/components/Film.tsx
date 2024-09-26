@@ -124,15 +124,17 @@ const formatNumber = (number:number ) => {
             ))}
           </ul>
           <div className="flex items-center gap-1 mobile:mx-auto">
+            <span className='capitalize mr-2'>{film.mediaType}</span>
+
             <MdStar className="text-yellow-300" />
             <span className="">{film.rating?.toFixed(1)}</span>
           </div>
-          <div className='flex items-center gap-1 mobile:mx-auto'>
+          <div className="flex items-center gap-1 mobile:mx-auto">
             <FaRegCalendarAlt></FaRegCalendarAlt>
             <span>{new Date(film.releaseDate).getFullYear()}</span>
-            <div className='ml-3 flex items-center gap-1 flex-1'>
-            <MdVisibility></MdVisibility>
-            <span>{formatNumber(film.views)}</span>
+            <div className="ml-3 flex items-center gap-1 flex-1">
+              <MdVisibility></MdVisibility>
+              <span>{formatNumber(film.views)}</span>
             </div>
           </div>
           <p className=" line-clamp-3 opacity-[0.9] mobile:text-center">
@@ -150,11 +152,10 @@ const formatNumber = (number:number ) => {
           <div className="flex items-center gap-3 w-max">
             {casts.map((cast, i) => (
               <div key={i} className="flex-shrink-0  w-[240px] mb-6  ">
-                
                 <Card
                   withPlay={false}
                   imageSrc={tmdbImageSrc(cast.profilePath)}
-                  cardType='cast'
+                  cardType="cast"
                   mediaType={film.mediaType}
                   releaseDate={film.releaseDate}
                 >
@@ -183,7 +184,7 @@ const formatNumber = (number:number ) => {
                 key={i}
                 imageSrc={youtubeThubnail(trailer.key)}
                 className="flex-shrink-0 w-[300px] mb-6 rounded-lg overflow-hidden  "
-                cardType='trailer'
+                cardType="trailer"
                 mediaType={film.mediaType}
                 releaseDate={film.releaseDate}
               ></Card>
@@ -214,7 +215,7 @@ const formatNumber = (number:number ) => {
                 title={season.name}
                 imageSrc={tmdbImageSrc(season.posterPath)}
                 key={i}
-                cardType='season'
+                cardType="season"
                 mediaType={film.mediaType}
                 releaseDate={film.releaseDate}
               ></Card>
