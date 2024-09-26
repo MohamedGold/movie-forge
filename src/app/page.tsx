@@ -88,54 +88,6 @@ export default function Home() {
 
       {/* trendings */}
 
-      {/* <Section className="py-0 " hidden={trendings.length === 0}>
-        <Slider
-          className="slick-hero "
-          autoplay={true}
-          slidesToShow={1}
-          slidesToScroll={1}
-        >
-          {(onSwipe) =>
-            trendings.map((film, i) => (
-              <TrendingsHero
-                onPlayTrailer={() => playTrailer(film)}
-                onClick={() =>
-                  !onSwipe ? router.push(`/${film.mediaType}/${film.id}`) : ''
-                }
-                film={film}
-                key={i}
-              ></TrendingsHero>
-            ))
-          }
-        </Slider>
-      </Section> */}
-
-      {/* <Section className="py-0 " hidden={trendings.length === 0}>
-        <Slider
-          className="slick-hero"
-          autoplay={true}
-          slidesToShow={1}
-          slidesToScroll={1}
-          dots={true}
-        >
-          {(onSwipe) =>
-            trendings.map((film, i) => (
-              <TrendingsHero
-                key={i}
-                film={film}
-                onPlayTrailer={() => playTrailer(film)}
-                onClick={() => {
-                  // منع الانتقال عند الـ swipe أو الضغط الطويل
-                  if (!onSwipe) {
-                    goToDetailPage(film)
-                  }
-                }}
-              />
-            ))
-          }
-        </Slider>
-      </Section> */}
-
       <Section className="py-0 " hidden={trendings.length === 0}>
         <Slider
           className="slick-hero"

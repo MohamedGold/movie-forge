@@ -340,14 +340,15 @@ export default function Card(props: Props) {
     >
       <div
         className="
-          mobile:h-[100%]
-          lg:h-[100%] 
+          mobile:min-h-[200px]
+           vs:min-h-[200px]
+          sm:min-h-[200px]
+          lg:min-h-[300px] 
           h-[200px]
-          relative
-          image-wrapper
           
-          vs:h-[100%]
-          sm:h-[100%]
+  
+
+          relative
           rounded-lg 
           overflow-hidden
           transition-all 

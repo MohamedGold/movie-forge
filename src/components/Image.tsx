@@ -16,7 +16,7 @@ export default function Image(props: Props) {
       <img
         src={props.src}
         alt={props.alt || 'Not Found'}
-        className="w-full h-full min-h-[200px] object-cover"
+        className="w-full  h-full   object-cover"
       />
     </div>
   )

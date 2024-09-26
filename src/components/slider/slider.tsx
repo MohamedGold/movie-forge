@@ -11,7 +11,7 @@ interface Props extends Omit<Settings, 'children'> {
 export default function Slider(props: Props) {
   let settings: Omit<Settings, 'children'> = {
     ...props,
-    speed: 700, // زيادة سرعة التمرير إلى 800ms للحصول على حركة سلسة
+    speed: 800, // زيادة سرعة التمرير إلى 800ms للحصول على حركة سلسة
     cssEase: 'ease-in-out', // استخدام تأثير سلاسة بين البداية والنهاية
   }
 
