@@ -172,7 +172,7 @@ export default function TrendingsHero(props: Props) {
 
   return (
     <div
-      className="h-[300px] relative flex items-center cursor-pointer"
+      className="h-[300px] min-h-[300px] relative flex items-center cursor-pointer"
       onMouseDown={handleMouseDown} // استدعاء عند الضغط للأسفل
       onMouseUp={handleMouseUp} // استدعاء عند رفع الضغط
       onMouseLeave={() => {
@@ -184,11 +184,11 @@ export default function TrendingsHero(props: Props) {
       }}
     >
       {/*  bg img */}
-      <div className="absolute left-0 top-0 right-0 bottom-0">
+      <div className="absolute left-0  top-0 right-0 bottom-0">
         <div className="absolute inset-0 bg-gradient-to-r from-body via-transparent  to-body overlay-slick-hero"></div>
         <Image
           src={tmdbImageSrc(props.film.coverPath)}
-          className="rounded-0 rounded-none"
+          className="rounded-0  rounded-none"
           alt=""
         />
         <div className="overlay-film-cover"></div>

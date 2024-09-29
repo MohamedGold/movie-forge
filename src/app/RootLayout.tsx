@@ -1,68 +1,3 @@
-// 'use client'
-// import { createContext, useContext, useEffect, useState } from 'react'
-// import Header from '@/components/Header'
-// import Footer from '@/components/Footer'
-// import Loading from '@/components/Loading'
-// import { getGenres } from '@/api/tmdb-api'
-// import { MediaType } from '@/types'
-// import { Genre } from '@/interfaces'
-
-// type Genres = {
-//   [key in MediaType]: Genre[]
-// }
-
-// const GlobalContext = createContext<{
-//   genres: Genres
-// }>({
-//   genres: {
-//     movie: [],
-//     tv: [],
-//   }
-// })
-
-// export const useGlobalContext = () => useContext(GlobalContext)
-
-// export default function RootLayout({
-//   children,
-// }: {
-//   children: React.ReactNode
-// }) {
-//   const [genres, setGenres] = useState<Genres>({
-//     movie: [],
-//     tv: [],
-//   })
-
-//   const fetchGenres = async () => {
-//     const movie = await getGenres('movie')
-//     const tv = await getGenres('tv')
-//     setGenres({
-//       movie,
-//       tv,
-//     })
-//   }
-
-//   useEffect(() => {
-//     fetchGenres()
-//   }, [])
-
-//   if (!genres.movie.length || !genres.tv.length) {
-//     return (
-//       <div className="fixed left-0 right-0 bottom-0 top-0 flex items-center justify-center">
-//         <Loading />
-//       </div>
-//     )
-//   }
-
-//   return (
-//     <GlobalContext.Provider value={{ genres }}>
-//       <Header />
-//       <main className="pb-[65px]  ">{children}</main>
-//       <Footer />
-//     </GlobalContext.Provider>
-//   )
-// }
-
-
 
 'use client'
 import { createContext, useContext, useEffect, useState } from 'react'
@@ -113,7 +48,7 @@ export default function RootLayout({
   // Track scroll position to show/hide the Scroll To Top button
   useEffect(() => {
     const handleScroll = () => {
-      if (window.scrollY > 600) {
+      if (window.scrollY > 400) {
         setShowScrollToTop(true)
       } else {
         setShowScrollToTop(false)
@@ -139,7 +74,7 @@ export default function RootLayout({
 
   if (!genres.movie.length || !genres.tv.length) {
     return (
-      <div className="fixed left-0 right-0 bottom-0  top-0 flex items-center justify-center">
+      <div className="fixed left-0 right-0 bottom-0   top-0 flex items-center justify-center">
         <Loading />
       </div>
     )
@@ -148,7 +83,7 @@ export default function RootLayout({
   return (
     <GlobalContext.Provider value={{ genres }}>
       <Header />
-      <main className="pb-[65px]  ">{children}</main>
+      <main className="pb-[65px]   ">{children}</main>
       <Footer />
 
       {/* Scroll to Top Button */}
@@ -166,3 +101,17 @@ export default function RootLayout({
     </GlobalContext.Provider>
   )
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+

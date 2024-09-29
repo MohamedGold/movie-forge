@@ -56,3 +56,7 @@ export default function Slider(props: Props) {
     </Slick>
   )
 }
+
+
+
+

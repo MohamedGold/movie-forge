@@ -72,6 +72,12 @@ export default function Header() {
     }
   }, [onWindowClick]) // Added onWindowClick as a dependency
 
+
+
+
+  
+  
+
   return (
     <div className="bg-header sticky  top-0 left-0 right-0 z-[99] ">
       <Container className="flex items-center mobile:flex-wrap mobile:justify-evenly  justify-between gap-3  ">
@@ -79,7 +85,7 @@ export default function Header() {
         <div className="flex items-center gap-6">
           {/* brand */}
           <h1 className="text-2xl mobile:me-3 mobile:text-xl font-semibold">
-            <Link href={'/'}>MovieForge</Link>
+            <Link  href={'/'}>MovieForge</Link>
           </h1>
           {/* menu */}
           <div className="flex items-center gap-3 pt-1.5 mobile:fixed mobile:bottom-0 mobile:left-0 mobile:right-0 mobile:justify-center mobile:py-3 mobile:bg-header mobile:gap-6  ">

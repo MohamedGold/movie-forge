@@ -1,3 +1,4 @@
+
 import './globals.css'
 import { ReactNode } from 'react'
 import RootLayout from './RootLayout' // تأكد من المسار الصحيح

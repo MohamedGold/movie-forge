@@ -3,6 +3,7 @@ import { MediaType } from '@/types'
 import { formatResult } from '@/utilts'
 import axios, { AxiosResponse } from 'axios'
 
+
 const axiosClient = axios.create({
   baseURL: process.env.NEXT_PUBLIC_TMDB_API_URL, // Updated variable name
 })
@@ -326,6 +327,7 @@ export const discover = async (
     totalPages: 0,
   }
 }
+
 
 
 
