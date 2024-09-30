@@ -69,7 +69,7 @@ export default function Season() {
             <Image
               alt=""
               src={tmdbImageSrc(episode.stillPath)}
-              className="min-w-[300px] w-[270px] mobile:mx-auto  h-[320px]"
+              className="min-w-[300px] w-[270px] mobile:mx-auto  h-[350px]"
             ></Image>
             <div className=" overflow-hidden flex flex-col gap-3  w-full mobile:py-3 ">
               <p className="text-lg truncate mobile:text-center mobile:mt-3">

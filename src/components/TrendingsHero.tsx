@@ -141,7 +141,7 @@ export default function TrendingsHero(props: Props) {
 
   const handleMouseDown = () => {
     // بدء مؤقت الضغط المطول
-    pressTimerRef.current = setTimeout(() => setIsLongPress(true), 100)
+    pressTimerRef.current = setTimeout(() => setIsLongPress(true), 150)
   }
 
   const { genres } = useGlobalContext()

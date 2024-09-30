@@ -37,7 +37,7 @@ export default function Card(props: Props) {
   const { genres } = useGlobalContext()
 
   const handleMouseDown = (event: React.MouseEvent | React.TouchEvent) => {
-    pressTimerRef.current = setTimeout(() => setIsLongPress(true), 96)
+    pressTimerRef.current = setTimeout(() => setIsLongPress(true), 150)
     const clientX =
       (event as React.MouseEvent).clientX ||
       (event as React.TouchEvent).touches[0].clientX
