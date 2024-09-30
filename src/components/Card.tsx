@@ -27,7 +27,6 @@ export default function Card(props: Props) {
   const withPlay = props.withPlay ?? true
   const [isLongPress, setIsLongPress] = useState(false)
   const pressTimerRef = useRef<NodeJS.Timeout | null>(null)
-  const debounceTimerRef = useRef<NodeJS.Timeout | null>(null) // Reference to debounce timer
   const startPositionRef = useRef<{ x: number; y: number } | null>(null) // Track start position
   const movementThreshold = 8 // Threshold for detecting a scroll instead of a click
   // loading
@@ -46,12 +45,7 @@ export default function Card(props: Props) {
       (event as React.TouchEvent).touches[0].clientY
     startPositionRef.current = { x: clientX, y: clientY }
 
-    // Start a debounce timer for 1 second
-    debounceTimerRef.current = setTimeout(() => {
-      if (!isLongPress && props.onClick && !props.onSwipe) {
-        props.onClick()
-      }
-    }, 1000)
+    
   }
 
   const handleMouseUp = (event: React.MouseEvent | React.TouchEvent) => {
@@ -61,10 +55,7 @@ export default function Card(props: Props) {
     }
 
 
-     if (debounceTimerRef.current) {
-       clearTimeout(debounceTimerRef.current) // Clear the debounce timer when releasing
-       debounceTimerRef.current = null
-     }
+   
 
     const startPosition = startPositionRef.current
     const clientX =
@@ -97,9 +88,7 @@ export default function Card(props: Props) {
      if (pressTimerRef.current) {
        clearTimeout(pressTimerRef.current)
      }
-     if (debounceTimerRef.current) {
-       clearTimeout(debounceTimerRef.current)
-     }
+     
      setIsLongPress(false)
    }
 
