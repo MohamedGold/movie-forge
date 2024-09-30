@@ -154,7 +154,7 @@ export default function TrendingsHero(props: Props) {
       )
       .slice(0, 2) || [] // Adjust the slice as per your requirement
 
-  const handleMouseUp = () => {
+  const handleMouseUp = (event: React.MouseEvent | React.TouchEvent) => {
     // إلغاء المؤقت عند رفع اليد
     if (pressTimerRef.current) {
       clearTimeout(pressTimerRef.current)
@@ -162,8 +162,11 @@ export default function TrendingsHero(props: Props) {
     }
 
     // إذا لم يكن ضغط طويل، نفذ onClick
-    if (!isLongPress) {
-      props.onClick()
+    if (!isLongPress && props.onClick) {
+      // Check if the event is a left-click
+      if ((event as React.MouseEvent).button === 0) {
+        props.onClick()
+      }
     }
 
     // إعادة ضبط حالة الضغط الطويل

@@ -28,7 +28,7 @@ export default function Card(props: Props) {
   const [isLongPress, setIsLongPress] = useState(false)
   const pressTimerRef = useRef<NodeJS.Timeout | null>(null)
   const startPositionRef = useRef<{ x: number; y: number } | null>(null) // Track start position
-  const movementThreshold = 8 // Threshold for detecting a scroll instead of a click
+  // const movementThreshold = 8 // Threshold for detecting a scroll instead of a click
   // loading
   const [loading, setLoading] = useState(true)
 
@@ -55,29 +55,15 @@ export default function Card(props: Props) {
     }
 
 
-   
 
-    const startPosition = startPositionRef.current
-    const clientX =
-      (event as React.MouseEvent).clientX ||
-      (event as React.TouchEvent).changedTouches[0].clientX
-    const clientY =
-      (event as React.MouseEvent).clientY ||
-      (event as React.TouchEvent).changedTouches[0].clientY
-
-    if (startPosition) {
-      const deltaX = Math.abs(clientX - startPosition.x)
-      const deltaY = Math.abs(clientY - startPosition.y)
-      if (deltaX > movementThreshold || deltaY > movementThreshold) {
-        // If moved beyond the threshold, consider it a scroll, not a click
-        setIsLongPress(false)
-        return
+    
+    if (!isLongPress && props.onClick && !props.onSwipe) {
+      // Check if the event is a left-click
+      if ((event as React.MouseEvent).button === 0) {
+        props.onClick()
       }
     }
 
-    if (!isLongPress && props.onClick && !props.onSwipe) {
-      props.onClick()
-    }
 
     setIsLongPress(false)
   }
@@ -92,17 +78,15 @@ export default function Card(props: Props) {
      setIsLongPress(false)
    }
 
+   
+
   /// الحصول على أسماء التصنيفات بناءً على genreIds (عرض حد أقصى لتصنيفين)
   const genreNames =
     props.genreIds
       ?.map((id) => genres[props.mediaType]?.find((g) => g.id === id)?.name)
       .slice(0, 2) || []
 
-  // const formatNumber = (number: number) => {
-  //   const numberParts = number.toString().split('.')
-  //   numberParts[0] = numberParts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ',')
-  //   return numberParts.join(',')
-  // }
+  
 
   const getYear = (dateString: string) => {
     const date = new Date(dateString)
@@ -116,6 +100,7 @@ export default function Card(props: Props) {
       onTouchStart={handleMouseDown}
       onTouchEnd={handleMouseUp}
       onMouseLeave={handleMouseLeave}
+      // onContextMenu={handleContextMenu} // Prevent right-click context menu
       className={mergeClassName(
         'group mx-3 my-1.5 cursor-pointer transition-all duration-1000',
         props.className
