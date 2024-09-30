@@ -1,5 +1,5 @@
 'use client'
-import { ReactNode, useState } from 'react'
+import { ReactNode, useEffect, useRef, useState } from 'react'
 import './slider.css'
 import Slick, { Settings } from 'react-slick'
 
@@ -11,8 +11,8 @@ interface Props extends Omit<Settings, 'children'> {
 export default function Slider(props: Props) {
   let settings: Omit<Settings, 'children'> = {
     ...props,
-    speed: 800, // زيادة سرعة التمرير إلى 800ms للحصول على حركة سلسة
-    cssEase: 'ease-in-out', // استخدام تأثير سلاسة بين البداية والنهاية
+    speed: 300,
+    cssEase: 'ease-in-out', 
   }
 
   if (props.isMoviesCard) {

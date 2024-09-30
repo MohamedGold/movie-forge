@@ -443,11 +443,15 @@ export default function Home() {
       {/* in theaters */}
       <Section title="In Theaters" hidden={inTheaters.length === 0}>
         <Slider isMoviesCard={true}>
-          {(_) =>
+          {(onSwipe) =>
             inTheaters.map((film, i) => (
               <Card
                 key={i}
-                onClick={() => goToDetailPage(film)}
+                onClick={() => {
+                  if (!onSwipe) {
+                    goToDetailPage(film)
+                  }
+                }}
                 title={film.title}
                 imageSrc={tmdbImageSrc(film.posterPath)}
                 rating={film.rating} // التقييم
@@ -464,11 +468,15 @@ export default function Home() {
       {/* popular */}
       <Section title="What's Popular" hidden={popular.length === 0}>
         <Slider isMoviesCard={true}>
-          {(_) =>
+          {(onSwipe) =>
             popular.map((film, i) => (
               <Card
                 key={i}
-                onClick={() => goToDetailPage(film)}
+                onClick={() => {
+                  if (!onSwipe) {
+                    goToDetailPage(film)
+                  }
+                }}
                 title={film.title}
                 imageSrc={tmdbImageSrc(film.posterPath)}
                 rating={film.rating} // التقييم
@@ -491,11 +499,15 @@ export default function Home() {
         onViewMoreClick={() => router.push(`/list/top-rated-tv`)}
       >
         <Slider isMoviesCard={true}>
-          {(_) =>
+          {(onSwipe) =>
             topRatedTv.map((film, i) => (
               <Card
                 key={i}
-                onClick={() => goToDetailPage(film)}
+                onClick={() => {
+                  if (!onSwipe) {
+                    goToDetailPage(film)
+                  }
+                }}
                 title={film.title}
                 imageSrc={tmdbImageSrc(film.posterPath)}
                 rating={film.rating} // التقييم
@@ -518,11 +530,15 @@ export default function Home() {
         onViewMoreClick={() => router.push(`/list/top-rated-movies`)}
       >
         <Slider isMoviesCard={true}>
-          {(_) =>
+          {(onSwipe) =>
             topRatedMovie.map((film, i) => (
               <Card
                 key={i}
-                onClick={() => goToDetailPage(film)}
+                onClick={() => {
+                  if (!onSwipe) {
+                    goToDetailPage(film)
+                  }
+                }}
                 title={film.title}
                 imageSrc={tmdbImageSrc(film.posterPath)}
                 rating={film.rating} // التقييم

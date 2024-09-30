@@ -458,6 +458,11 @@ export default function Catalog(props: Props) {
     }
   }, [query, props.type, currentPage, isInitialized])
 
+  // Reset to page 1 on new search query
+  useEffect(() => {
+    setCurrentPage(1) // Reset to first page on new query
+  }, [query])
+
   // Initialization effect to restore state
   useEffect(() => {
     const savedPage = sessionStorage.getItem(`${scrollKey}-currentPage`)

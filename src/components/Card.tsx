@@ -33,7 +33,7 @@ export default function Card(props: Props) {
   const { genres } = useGlobalContext()
 
   const handleMouseDown = () => {
-    pressTimerRef.current = setTimeout(() => setIsLongPress(true), 220)
+    pressTimerRef.current = setTimeout(() => setIsLongPress(true), 96)
   }
 
   const handleMouseUp = () => {

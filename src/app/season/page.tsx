@@ -26,11 +26,11 @@ export default function Season() {
   }, [])
 
   if (!season) {
-    return <></>
+    return <div className='min-h-[100vh]'></div>
   }
 
   return (
-    <>
+    <div className='min-h-[100vh]'>
       {/* background */}
       <div className="h-[150px]  left-0 right-0 top-0 relative ">
         <div className="absolute inset-0 bg-gradient-to-b from-body via-transparent to-body overlay-film-cover"></div>
@@ -45,7 +45,7 @@ export default function Season() {
         <Image
           src={tmdbImageSrc(season.posterPath)}
           alt=""
-          className="w-[150px] max-w-[150px] min-w-[200px] min-h-[200px] h-[200px] mobile:mx-auto  "
+          className="w-[150px] max-w-[150px] min-w-[200px] min-h-[200px] h-[250px] mobile:mx-auto  "
         ></Image>
         <div className="px-3 flex flex-col items-start gap-3 py-3  ">
           <p className="text-2xl font-semibold line-clamp-1 mobile:mx-auto mobile:mt-3 ">{season.filmName}</p>
@@ -63,13 +63,13 @@ export default function Season() {
       <Section className='mobile:text-center' title="Episodes">
         {season.episodes?.map((episode, i) => (
           <div
-            className="my-6 flex items-stretch gap-4 rounded-md overflow-hidden cursor-pointer hover:bg-primary px-3 py-1.5 mobile:block vs:block  "
+            className="my-6 flex items-stretch gap-4 rounded-md overflow-hidden cursor-pointer hover:bg-primary transition-all duration-200 px-3 py-1.5 mobile:block vs:block  "
             key={i}
           >
             <Image
               alt=""
               src={tmdbImageSrc(episode.stillPath)}
-              className="min-w-[300px] w-[270px] mobile:mx-auto  h-[150px]"
+              className="min-w-[300px] w-[270px] mobile:mx-auto  h-[320px]"
             ></Image>
             <div className=" overflow-hidden flex flex-col gap-3  w-full mobile:py-3 ">
               <p className="text-lg truncate mobile:text-center mobile:mt-3">
@@ -86,6 +86,6 @@ export default function Season() {
           </div>
         ))}
       </Section>
-    </>
+    </div>
   )
 }
