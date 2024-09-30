@@ -459,6 +459,7 @@ export default function Home() {
                 views={film.views} // عدد المشاهدات
                 mediaType={film.mediaType} // تمرير نوع الوسائط (فيلم/مسلسل)
                 releaseDate={film.releaseDate}
+                onSwipe={onSwipe} // Passing the onSwipe state to Card
               ></Card>
             ))
           }
@@ -484,6 +485,7 @@ export default function Home() {
                 views={film.views} // عدد المشاهدات
                 mediaType={film.mediaType} // تمرير نوع الوسائط (فيلم/مسلسل)
                 releaseDate={film.releaseDate}
+                onSwipe={onSwipe} // Passing the onSwipe state to Card
               ></Card>
             ))
           }
@@ -515,6 +517,7 @@ export default function Home() {
                 views={film.views} // عدد المشاهدات
                 mediaType={film.mediaType} // تمرير نوع الوسائط (فيلم/مسلسل)
                 releaseDate={film.releaseDate}
+                onSwipe={onSwipe} // Passing the onSwipe state to Card
               ></Card>
             ))
           }
@@ -546,6 +549,7 @@ export default function Home() {
                 views={film.views} // عدد المشاهدات
                 mediaType={film.mediaType} // تمرير نوع الوسائط (فيلم/مسلسل)
                 releaseDate={film.releaseDate}
+                onSwipe={onSwipe} // Passing the onSwipe state to Card
               ></Card>
             ))
           }

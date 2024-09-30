@@ -12,7 +12,7 @@ export default function Slider(props: Props) {
   let settings: Omit<Settings, 'children'> = {
     ...props,
     speed: 600,
-    cssEase: 'ease-in-out', 
+    cssEase: 'ease-in-out',
   }
 
   if (props.isMoviesCard) {

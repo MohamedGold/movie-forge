@@ -17,37 +17,91 @@ interface Props extends CustomComponentProps {
   views?: number // إضافة عدد المشاهدات
   onClick?: () => void
   withPlay?: boolean
-  mediaType: MediaType  // نوع الوسائط (فيلم/مسلسل)
+  mediaType: MediaType // نوع الوسائط (فيلم/مسلسل)
   releaseDate: string
   cardType?: 'default' | 'cast' | 'season' | 'trailer' // Add a cardType prop
+  onSwipe?: boolean // New prop to receive swipe state from Slider
 }
 
 export default function Card(props: Props) {
   const withPlay = props.withPlay ?? true
   const [isLongPress, setIsLongPress] = useState(false)
   const pressTimerRef = useRef<NodeJS.Timeout | null>(null)
+  const debounceTimerRef = useRef<NodeJS.Timeout | null>(null) // Reference to debounce timer
+  const startPositionRef = useRef<{ x: number; y: number } | null>(null) // Track start position
+  const movementThreshold = 70 // Threshold for detecting a scroll instead of a click
   // loading
-    const [loading, setLoading] = useState(true)
+  const [loading, setLoading] = useState(true)
 
   // الحصول على التصنيفات من الـ globalContext
   const { genres } = useGlobalContext()
 
-  const handleMouseDown = () => {
+  const handleMouseDown = (event: React.MouseEvent | React.TouchEvent) => {
     pressTimerRef.current = setTimeout(() => setIsLongPress(true), 96)
+    const clientX =
+      (event as React.MouseEvent).clientX ||
+      (event as React.TouchEvent).touches[0].clientX
+    const clientY =
+      (event as React.MouseEvent).clientY ||
+      (event as React.TouchEvent).touches[0].clientY
+    startPositionRef.current = { x: clientX, y: clientY }
+
+    // Start a debounce timer for 1 second
+    debounceTimerRef.current = setTimeout(() => {
+      if (!isLongPress && props.onClick && !props.onSwipe) {
+        props.onClick()
+      }
+    }, 1000)
   }
 
-  const handleMouseUp = () => {
+  const handleMouseUp = (event: React.MouseEvent | React.TouchEvent) => {
     if (pressTimerRef.current) {
       clearTimeout(pressTimerRef.current)
       pressTimerRef.current = null
     }
 
-    if (!isLongPress && props.onClick) {
+
+     if (debounceTimerRef.current) {
+       clearTimeout(debounceTimerRef.current) // Clear the debounce timer when releasing
+       debounceTimerRef.current = null
+     }
+
+    const startPosition = startPositionRef.current
+    const clientX =
+      (event as React.MouseEvent).clientX ||
+      (event as React.TouchEvent).changedTouches[0].clientX
+    const clientY =
+      (event as React.MouseEvent).clientY ||
+      (event as React.TouchEvent).changedTouches[0].clientY
+
+    if (startPosition) {
+      const deltaX = Math.abs(clientX - startPosition.x)
+      const deltaY = Math.abs(clientY - startPosition.y)
+      if (deltaX > movementThreshold || deltaY > movementThreshold) {
+        // If moved beyond the threshold, consider it a scroll, not a click
+        setIsLongPress(false)
+        return
+      }
+    }
+
+    if (!isLongPress && props.onClick && !props.onSwipe) {
       props.onClick()
     }
 
     setIsLongPress(false)
   }
+
+
+
+   const handleMouseLeave = () => {
+     if (pressTimerRef.current) {
+       clearTimeout(pressTimerRef.current)
+     }
+     if (debounceTimerRef.current) {
+       clearTimeout(debounceTimerRef.current)
+     }
+     setIsLongPress(false)
+   }
 
   /// الحصول على أسماء التصنيفات بناءً على genreIds (عرض حد أقصى لتصنيفين)
   const genreNames =
@@ -70,12 +124,9 @@ export default function Card(props: Props) {
     <div
       onMouseDown={handleMouseDown}
       onMouseUp={handleMouseUp}
-      onMouseLeave={() => {
-        if (pressTimerRef.current) {
-          clearTimeout(pressTimerRef.current)
-        }
-        setIsLongPress(false)
-      }}
+      onTouchStart={handleMouseDown}
+      onTouchEnd={handleMouseUp}
+      onMouseLeave={handleMouseLeave}
       className={mergeClassName(
         'group mx-3 my-1.5 cursor-pointer transition-all duration-1000',
         props.className
@@ -145,7 +196,7 @@ export default function Card(props: Props) {
             </button>
           </div>
         ) : null}
-        <Image  className="test" alt="" src={props.imageSrc} />
+        <Image className="test" alt="" src={props.imageSrc} />
 
         {/* العناصر المضافة: التقييم، التصنيفات، وعدد المشاهدات **/}
         {props.cardType !== 'cast' &&

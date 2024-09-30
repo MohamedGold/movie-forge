@@ -510,8 +510,8 @@ export default function Film(props: Props) {
           </div>
         </div>
       </Section>
-       {/* seasons */}
-       <Section
+      {/* seasons */}
+      <Section
         className="mobile:text-center  "
         title="Seasons"
         hidden={film.seasons.length === 0}
@@ -523,7 +523,7 @@ export default function Film(props: Props) {
           initialSlide={0}
           swipe={true}
         >
-          {(_) =>
+          {(onSwipe) =>
             film.seasons.map((season, i) => (
               <Card
                 className="lg:h-[300px] mobile:h-[200px] vs:h-[200px] sm:h-[200px] mb-16"
@@ -536,6 +536,7 @@ export default function Film(props: Props) {
                 cardType="season"
                 mediaType={film.mediaType}
                 releaseDate={film.releaseDate}
+                onSwipe={onSwipe} // Passing the onSwipe state to Card
               ></Card>
             ))
           }
@@ -548,7 +549,7 @@ export default function Film(props: Props) {
         hidden={recommendations.length === 0}
       >
         <Slider isMoviesCard={true}>
-          {(_) =>
+          {(onSwipe) =>
             recommendations.map((film, i) => (
               <Card
                 onClick={() => router.push(`/${props.mediaType}/${film.id}`)}
@@ -560,6 +561,7 @@ export default function Film(props: Props) {
                 views={film.views} // عدد المشاهدات
                 mediaType={film.mediaType} // تمرير نوع الوسائط (فيلم/مسلسل)
                 releaseDate={film.releaseDate}
+                onSwipe={onSwipe} // Passing the onSwipe state to Card
               ></Card>
             ))
           }
