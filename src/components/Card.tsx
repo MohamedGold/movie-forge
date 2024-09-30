@@ -29,7 +29,7 @@ export default function Card(props: Props) {
   const pressTimerRef = useRef<NodeJS.Timeout | null>(null)
   const debounceTimerRef = useRef<NodeJS.Timeout | null>(null) // Reference to debounce timer
   const startPositionRef = useRef<{ x: number; y: number } | null>(null) // Track start position
-  const movementThreshold = 70 // Threshold for detecting a scroll instead of a click
+  const movementThreshold = 8 // Threshold for detecting a scroll instead of a click
   // loading
   const [loading, setLoading] = useState(true)
 
