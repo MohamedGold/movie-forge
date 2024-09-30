@@ -494,7 +494,7 @@ export default function Film(props: Props) {
         title="Trailers"
         hidden={trailers.length === 0}
       >
-        <div className="scrollbar scrollbar-thumb-primary  scrollbar-track-header overflow-x-auto">
+        {/* <div className="scrollbar scrollbar-thumb-primary  scrollbar-track-header overflow-x-auto">
           <div className="flex items-center gap-3  w-max">
             {trailers.map((trailer, i) => (
               <Card
@@ -508,7 +508,25 @@ export default function Film(props: Props) {
               />
             ))}
           </div>
-        </div>
+        </div> */}
+        <Slider isTrailerCard={true} trailers={trailers}>
+          {(onSwipe) =>
+            trailers.map((trailer, i) => (
+              <div key={i} className=" flex items-center overflow-y-hidden ">
+                <Card
+                  onClick={() => playTrailer(trailer.key)}
+                  key={i}
+                  imageSrc={youtubeThubnail(trailer.key)}
+                  className="      mb-6 rounded-lg overflow-hidden"
+                  cardType="trailer"
+                  mediaType={film.mediaType}
+                  releaseDate={film.releaseDate}
+                  onSwipe={onSwipe} // Passing the onSwipe state to Card
+                ></Card>
+              </div>
+            ))
+          }
+        </Slider>
       </Section>
       {/* seasons */}
       <Section

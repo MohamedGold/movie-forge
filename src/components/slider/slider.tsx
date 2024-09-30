@@ -6,6 +6,8 @@ import Slick, { Settings } from 'react-slick'
 interface Props extends Omit<Settings, 'children'> {
   isMoviesCard?: boolean
   isSeasonsCard?: boolean
+  isTrailerCard?: boolean
+  trailers?: any[] // Add trailers prop
   children?: (onSwipe: boolean) => ReactNode
 }
 export default function Slider(props: Props) {
@@ -41,6 +43,33 @@ export default function Slider(props: Props) {
       ],
     }
   }
+
+
+    if (props.isTrailerCard && props.trailers) {
+      const slideCount = props.trailers.length > 1 ? 2 : 1 // Use trailers from props
+      settings = {
+        ...settings,
+        infinite: false, 
+        slidesToShow: slideCount,
+        slidesToScroll: slideCount,
+        responsive: [
+          {
+            breakpoint: 600,
+            settings: {
+              slidesToShow: slideCount,
+              slidesToScroll: slideCount,
+            },
+          },
+          {
+            breakpoint: 480,
+            settings: {
+              slidesToShow: slideCount,
+              slidesToScroll: slideCount,
+            },
+          },
+        ],
+      }
+    }
 
   const [onSwipe, setOnSwipe] = useState(false)
 
