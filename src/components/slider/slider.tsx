@@ -14,8 +14,8 @@ interface Props extends Omit<Settings, 'children'> {
 export default function Slider(props: Props) {
   let settings: Omit<Settings, 'children'> = {
     ...props,
-    speed: 600,
-    cssEase: 'ease-out',
+    speed: 400,
+    cssEase: 'ease-in-out',
   }
 // ! Movie Card
   if (props.isMoviesCard) {
