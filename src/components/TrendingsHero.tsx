@@ -133,15 +133,23 @@ interface Props {
   onClick: () => void
   onPlayTrailer?: () => void
   genresIds?: number[]
+  onSwipe?: boolean // New prop to receive swipe state from Slider
 }
 
 export default function TrendingsHero(props: Props) {
   const [isLongPress, setIsLongPress] = useState(false) // للتحكم في حالة الضغط الطويل
   const pressTimerRef = useRef<NodeJS.Timeout | null>(null)
+  const startPositionRef = useRef<{ x: number; y: number } | null>(null) // Track start position
 
-  const handleMouseDown = () => {
-    // بدء مؤقت الضغط المطول
+  const handleMouseDown = (event: React.MouseEvent | React.TouchEvent) => {
     pressTimerRef.current = setTimeout(() => setIsLongPress(true), 150)
+    const clientX =
+      (event as React.MouseEvent).clientX ||
+      (event as React.TouchEvent).touches[0].clientX
+    const clientY =
+      (event as React.MouseEvent).clientY ||
+      (event as React.TouchEvent).touches[0].clientY
+    startPositionRef.current = { x: clientX, y: clientY }
   }
 
   const { genres } = useGlobalContext()
@@ -155,21 +163,38 @@ export default function TrendingsHero(props: Props) {
       .slice(0, 2) || [] // Adjust the slice as per your requirement
 
   const handleMouseUp = (event: React.MouseEvent | React.TouchEvent) => {
-    // إلغاء المؤقت عند رفع اليد
     if (pressTimerRef.current) {
       clearTimeout(pressTimerRef.current)
       pressTimerRef.current = null
     }
 
-    // إذا لم يكن ضغط طويل، نفذ onClick
-    if (!isLongPress && props.onClick) {
-      // Check if the event is a left-click
+    const clientX =
+      (event as React.MouseEvent).clientX ||
+      (event as React.TouchEvent).changedTouches[0].clientX
+    const clientY =
+      (event as React.MouseEvent).clientY ||
+      (event as React.TouchEvent).changedTouches[0].clientY
+
+    // Verify that the movement is minimal (indicating a click, not a scroll)
+    const startX = startPositionRef.current?.x || 0
+    const startY = startPositionRef.current?.y || 0
+    const movementThreshold = 10 // You can adjust the threshold as needed
+
+    const movedDistance = Math.sqrt(
+      Math.pow(clientX - startX, 2) + Math.pow(clientY - startY, 2)
+    )
+
+    if (
+      movedDistance < movementThreshold &&
+      !isLongPress &&
+      props.onClick &&
+      !props.onSwipe
+    ) {
       if ((event as React.MouseEvent).button === 0) {
         props.onClick()
       }
     }
 
-    // إعادة ضبط حالة الضغط الطويل
     setIsLongPress(false)
   }
 
@@ -211,7 +236,7 @@ export default function TrendingsHero(props: Props) {
                 : 'N/A'}
             </span>
             {/* rating */}
-            <div className='flex items-center bg-body/60 px-1 rounded-lg justify-center '>
+            <div className="flex items-center bg-body/60 px-1 rounded-lg justify-center ">
               <MdStar size={20} className="text-yellow-500  " />
               <span className=" ml- font-semibold fon  ">
                 {props.film.rating?.toFixed(1)}
