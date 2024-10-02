@@ -242,12 +242,12 @@ const getMenuClass = (path: string) => {
               onMouseEnter={() => setIsMoviesHovered(true)}
               onMouseLeave={() => setIsMoviesHovered(false)}
             >
-              <Link className={getMenuClass('/movies')} href={''}>
+              <button className={getMenuClass('/movies')} >
                 Movies
-              </Link>
+              </button>
               {/* Dropdown for Movies */}
               {isMoviesHovered && (
-                <div className="absolute top-full w-[150px] left-0 bg-header border border-white/60 rounded shadow-md mt-1 mobile:bottom-full mobile:top-auto vs:bottom-full vs:top-auto mobile:w-40 z-10">
+                <div className="absolute top-full w-[150px] left-0 bg-header border border-white/60 rounded shadow-md  mobile:bottom-full mobile:top-auto vs:bottom-full vs:top-auto mobile:w-40 z-10">
                   <Link
                     href={'/movies'}
                     className="block px-4 py-2 hover:bg-primary"
@@ -269,12 +269,12 @@ const getMenuClass = (path: string) => {
               onMouseEnter={() => setIsTVHovered(true)}
               onMouseLeave={() => setIsTVHovered(false)}
             >
-              <Link className={getMenuClass('/tv')} href={''}>
+              <button className={getMenuClass('/tv')} >
                 TV
-              </Link>
+              </button>
               {/* Dropdown for TV */}
               {isTVHovered && (
-                <div className="absolute top-full left-0 w-[150px] bg-header border border-white/60 rounded shadow-md mt-1 mobile:bottom-full mobile:top-auto vs:bottom-full vs:top-auto mobile:w-40 z-10">
+                <div className="absolute top-full left-0 w-[150px] bg-header border border-white/60 rounded shadow-md  mobile:bottom-full mobile:top-auto vs:bottom-full vs:top-auto mobile:w-40 z-10">
                   <Link
                     href={'/tv'}
                     className="block px-4 py-2 hover:bg-primary"
