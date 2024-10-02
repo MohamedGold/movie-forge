@@ -290,6 +290,12 @@ export default function Catalog(props: Props) {
               setCurrentPage(1)
               sessionStorage.removeItem(`${scrollKey}-selectedGenres`)
               sessionStorage.removeItem(`${scrollKey}-temporarySelectedGenres`)
+              // مسح جميع الـ scroll position من sessionStorage
+              Object.keys(sessionStorage).forEach((key) => {
+                if (key.startsWith(`${scrollKey}-scrollPosition-`)) {
+                  sessionStorage.removeItem(key)
+                }
+              })
             }}
           >
             Clear All Filters
@@ -345,6 +351,12 @@ export default function Catalog(props: Props) {
                   setSelectedGenres(temporarySelectedGenres)
                   setCurrentPage(1)
                   setIsFilterOpen(false)
+                  // مسح جميع الـ scroll position من sessionStorage
+                  Object.keys(sessionStorage).forEach((key) => {
+                    if (key.startsWith(`${scrollKey}-scrollPosition-`)) {
+                      sessionStorage.removeItem(key)
+                    }
+                  })
                 }}
               >
                 Find
