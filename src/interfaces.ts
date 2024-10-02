@@ -37,6 +37,7 @@ export interface Film {
   genres?: number[] // قائمة التصنيفات
   views: number // عدد المشاهدات
   releaseDate: string
+  genreNames?: string[] // Mapped genre names (optional field)
 }
 
 export interface Cast {

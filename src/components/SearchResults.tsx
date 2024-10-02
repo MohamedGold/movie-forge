@@ -167,7 +167,7 @@ export default function SearchResults(props: Props) {
 
   return (
     <div
-      className="absolute top-[48px] left-0 right-0 rounded-md overflow-auto scrollbar scrollbar-thumb-primary scrollbar-track-header bg-header max-h-[480px] shadow-lg"
+      className="absolute top-[44px] left-0 right-0 rounded-md overflow-auto scrollbar scrollbar-thumb-primary scrollbar-track-header bg-header max-h-[480px] shadow-lg"
       role="listbox"
     >
       {loading ? (

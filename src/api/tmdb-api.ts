@@ -78,39 +78,117 @@ export const getPopular = async (
   return []
 }
 
+// export const getTopRated = async (
+//   mediaType: MediaType,
+//   page = 1,
+//   genreId?: string // Add genreId as an optional parameter
+// ): Promise<{
+//   films: Film[],
+//   totalPages: number
+// }> => {
+//   try {
+//     const { data } = await axiosClient.get<
+//       any,
+//       AxiosResponse<{
+//         results: unknown[]
+//         total_pages: number
+//       }>
+//     >(`/${mediaType}/top_rated`, {
+//       params: {
+//         page,
+//         with_genres: genreId, // Pass genreId to the API if available
+//       },
+//     })
+
+//     return {
+//       films: data.results.map((val) => formatResult(val, mediaType)),
+//       totalPages: data.total_pages,
+//     }
+//   } catch (error) {
+//     console.error('Error fetching trendings:', error)
+//   }
+
+//   return {
+//     films: [],
+//     totalPages: 0,
+//   }
+// }
+
+
+
+
+
+
+
+
+
+
+
+
 export const getTopRated = async (
   mediaType: MediaType,
-  page = 1
+  page = 1,
+  genreId?: string // genreId is optional
 ): Promise<{
-  films: Film[],
+  films: Film[]
   totalPages: number
 }> => {
   try {
-    const { data } = await axiosClient.get<
-      any,
-      AxiosResponse<{
-        results: unknown[],
-        total_pages: number
-      }>
-    >(`/${mediaType}/top_rated`, {
-      params: {
-        page,
-      },
+    // Use /discover endpoint only if a genreId is specified
+    const endpoint = genreId
+      ? `/discover/${mediaType}`
+      : `/${mediaType}/top_rated`
+
+    // Set parameters accordingly
+    const params: { page: number; with_genres?: string; sort_by?: string } = {
+      page,
+    }
+
+    if (genreId) {
+      // Apply the genre filter with proper sorting for top-rated
+      params.with_genres = genreId
+      params.sort_by = 'vote_average.desc' // Sort by vote_average to fetch top-rated results
+      params['vote_count.gte'] = 200 // Adding a threshold to ensure the results are actually "top-rated"
+    }
+
+    const { data } = await axiosClient.get<{
+      results: unknown[]
+      total_pages: number
+    }>(endpoint, {
+      params,
+    })
+
+    // Map the genre names correctly for TV shows
+    const genreMapping: { [key: string]: string } = {
+      Action: 'Action & Adventure',
+      'Science Fiction': 'Sci-Fi & Fantasy',
+    }
+
+    const films = data.results.map((val) => {
+      const film = formatResult(val, mediaType)
+      // Add genre name mapping logic for TV shows
+      if (mediaType === 'tv' && film.genreIds) {
+        film.genreNames = film.genreIds.map((genreId) => {
+          return genreMapping[genreId] || `Genre ${genreId}`
+        })
+      }
+
+      return film
     })
 
     return {
-      films: data.results.map((val) => formatResult(val, mediaType)),
+      films,
       totalPages: data.total_pages,
     }
   } catch (error) {
-    console.error('Error fetching trendings:', error)
-  }
-
-  return {
-    films: [],
-    totalPages: 0,
+    console.error('Error fetching top-rated:', error)
+    return {
+      films: [],
+      totalPages: 0,
+    }
   }
 }
+
 
 export const search = async (
   query: string,
@@ -151,23 +229,66 @@ export const search = async (
   }
 }
 
+
+
+
+// export const getGenres = async (mediaType: MediaType): Promise<Genre[]> => {
+//   try {
+//     const { data } = await axiosClient.get<
+//       any,
+//       AxiosResponse<{
+//         genres: unknown[]
+//       }>
+//     >(`/genre/${mediaType}/list`)
+
+//     // Custom mapping for TV genres based on TMDB API response
+//     if (mediaType === 'tv') {
+//       return data.genres.map((genre) => {
+//         if (genre.name === 'Action')
+//           return { ...genre, name: 'Action & Adventure' }
+//         if (genre.name === 'Science Fiction')
+//           return { ...genre, name: 'Sci-Fi & Fantasy' }
+//         return genre
+//       }) as Genre[]
+//     }
+
+//     return data.genres as Genre[]
+//   } catch (error) {
+//     console.error(error)
+//   }
+
+//   return []
+// }
+
+
+
 export const getGenres = async (mediaType: MediaType): Promise<Genre[]> => {
   try {
     const { data } = await axiosClient.get<
       any,
       AxiosResponse<{
-        genres: unknown[]
+        genres: Genre[]
       }>
     >(`/genre/${mediaType}/list`)
 
-    return data.genres as Genre[]
+    const genreMapping: { [key: string]: string } = {
+      Action: 'Action & Adventure',
+      'Science Fiction': 'Sci-Fi & Fantasy',
+    }
+
+    if (mediaType === 'tv') {
+      return data.genres.map((genre) => ({
+        ...genre,
+        name: genreMapping[genre.name] || genre.name,
+      }))
+    }
+
+    return data.genres
   } catch (error) {
-    console.error(error)
+    console.error('Failed to fetch genres:', error)
+    throw error // Re-throw the error after logging it
   }
-
-  return []
 }
-
 export const getDetail = async (
   mediaType: MediaType,
   id: number
@@ -294,9 +415,46 @@ export const getSeason = async (
   return null
 }
 
+// export const discover = async (
+//   mediaType: MediaType,
+//   page = 1
+// ): Promise<{
+//   films: Film[]
+//   totalPages: number
+// }> => {
+//   try {
+//     const { data } = await axiosClient.get<
+//       any,
+//       AxiosResponse<{
+//         total_pages: number
+//         results: unknown[]
+//       }>
+//     >(`/discover/${mediaType}`, {
+//       params: {
+//         page,
+//       },
+//     })
+
+//     return {
+//       films: data.results.map((val) => formatResult(val, mediaType)),
+//       totalPages: data.total_pages,
+//     }
+//   } catch (error) {
+//     console.error('Error fetching :', error)
+//   }
+
+//   return {
+//     films: [],
+//     totalPages: 0,
+//   }
+// }
+
+
+
 export const discover = async (
   mediaType: MediaType,
-  page = 1
+  page = 1,
+  genreId?: string // Add genreId as an optional parameter
 ): Promise<{
   films: Film[]
   totalPages: number
@@ -311,6 +469,7 @@ export const discover = async (
     >(`/discover/${mediaType}`, {
       params: {
         page,
+        with_genres: genreId, // Pass genre ID to the API
       },
     })
 
@@ -327,8 +486,6 @@ export const discover = async (
     totalPages: 0,
   }
 }
-
-
 
 
 
