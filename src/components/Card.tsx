@@ -48,22 +48,57 @@ export default function Card(props: Props) {
     
   }
 
+  // const handleMouseUp = (event: React.MouseEvent | React.TouchEvent) => {
+  //   if (pressTimerRef.current) {
+  //     clearTimeout(pressTimerRef.current)
+  //     pressTimerRef.current = null
+  //   }
+
+
+
+    
+  //   if (!isLongPress && props.onClick && !props.onSwipe) {
+  //     // Check if the event is a left-click
+  //     if ((event as React.MouseEvent).button === 0) {
+  //       props.onClick()
+  //     }
+  //   }
+
+
+  //   setIsLongPress(false)
+  // }
   const handleMouseUp = (event: React.MouseEvent | React.TouchEvent) => {
     if (pressTimerRef.current) {
       clearTimeout(pressTimerRef.current)
       pressTimerRef.current = null
     }
 
+    const clientX =
+      (event as React.MouseEvent).clientX ||
+      (event as React.TouchEvent).changedTouches[0].clientX
+    const clientY =
+      (event as React.MouseEvent).clientY ||
+      (event as React.TouchEvent).changedTouches[0].clientY
 
+    // Verify that the movement is minimal (indicating a click, not a scroll)
+    const startX = startPositionRef.current?.x || 0
+    const startY = startPositionRef.current?.y || 0
+    const movementThreshold = 10 // You can adjust the threshold as needed
 
-    
-    if (!isLongPress && props.onClick && !props.onSwipe) {
-      // Check if the event is a left-click
+    const movedDistance = Math.sqrt(
+      Math.pow(clientX - startX, 2) + Math.pow(clientY - startY, 2)
+    )
+
+    if (
+      movedDistance < movementThreshold &&
+      !isLongPress &&
+      props.onClick &&
+      !props.onSwipe
+    ) {
       if ((event as React.MouseEvent).button === 0) {
         props.onClick()
       }
     }
-
 
     setIsLongPress(false)
   }
