@@ -494,30 +494,20 @@ export default function Film(props: Props) {
         title="Trailers"
         hidden={trailers.length === 0}
       >
-        {/* <div className="scrollbar scrollbar-thumb-primary  scrollbar-track-header overflow-x-auto">
-          <div className="flex items-center gap-3  w-max">
-            {trailers.map((trailer, i) => (
-              <Card
-                onClick={() => playTrailer(trailer.key)}
-                key={i}
-                imageSrc={youtubeThubnail(trailer.key)}
-                className="flex-shrink-0 mobile:w-[300px] w-[400px]   mb-6 rounded-lg overflow-hidden"
-                cardType="trailer"
-                mediaType={film.mediaType}
-                releaseDate={film.releaseDate}
-              />
-            ))}
-          </div>
-        </div> */}
         <Slider isTrailerCard={true} trailers={trailers}>
           {(onSwipe) =>
             trailers.map((trailer, i) => (
-              <div key={i} className=" flex items-center overflow-y-hidden ">
+              <div
+                key={i}
+                className={`flex items-center d-block  justify-center overflow-y-hidden ${
+                  trailers.length === 1 ? 'mx-auto   max-w-[500px]' : ''
+                }`}
+              >
                 <Card
                   onClick={() => playTrailer(trailer.key)}
                   key={i}
                   imageSrc={youtubeThubnail(trailer.key)}
-                  className="      mb-6 rounded-lg overflow-hidden"
+                  className=" mb-6  rounded-lg overflow-hidden"
                   cardType="trailer"
                   mediaType={film.mediaType}
                   releaseDate={film.releaseDate}
@@ -535,6 +525,8 @@ export default function Film(props: Props) {
         hidden={film.seasons.length === 0}
       >
         <Slider
+          isSeasonsCard={true}
+          season={film.seasons}
           slidesToShow={film.seasons.length > 2 ? 2 : 1}
           slidesToScroll={film.seasons.length > 2 ? 2 : 1}
           infinite={film.seasons.length > 1}
@@ -543,19 +535,26 @@ export default function Film(props: Props) {
         >
           {(onSwipe) =>
             film.seasons.map((season, i) => (
-              <Card
-                className="lg:h-[300px] mobile:h-[200px] vs:h-[200px] sm:h-[200px] mb-16"
-                onClick={() =>
-                  router.push(`/tv/${film.id}/season/${season.seasonNumber}`)
-                }
-                title={season.name}
-                imageSrc={tmdbImageSrc(season.posterPath)}
+              <div
                 key={i}
-                cardType="season"
-                mediaType={film.mediaType}
-                releaseDate={film.releaseDate}
-                onSwipe={onSwipe} // Passing the onSwipe state to Card
-              ></Card>
+                className={`flex items-center d-block  overflow-y-hidden ${
+                  film.seasons.length === 1 ? 'mx-auto lg:mb-5 max-w-[500px]' : ''
+                }`}
+              >
+                <Card
+                  className="lg:h-[300px]  mobile:h-[200px] vs:h-[200px] sm:h-[200px] mb-16"
+                  onClick={() =>
+                    router.push(`/tv/${film.id}/season/${season.seasonNumber}`)
+                  }
+                  title={season.name}
+                  imageSrc={tmdbImageSrc(season.posterPath)}
+                  key={i}
+                  cardType="season"
+                  mediaType={film.mediaType}
+                  releaseDate={film.releaseDate}
+                  onSwipe={onSwipe} // Passing the onSwipe state to Card
+                ></Card>
+              </div>
             ))
           }
         </Slider>

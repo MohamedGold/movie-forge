@@ -75,3 +75,8 @@ body {
   min-height: 100vh !important;
 }
 
+
+
+.d-block{
+  display: block !important;
+}
