@@ -14,7 +14,7 @@ export default function Section(props: Props) {
   if (props.hidden) return <></>
   return (
     <Container className={props.className}>
-      <div className="flex justify-start mb-2  items-center">
+      <div className="flex justify-start mb-2 lg:mb-5  items-center">
         {props.title ? (
           <h1
             onClick={props.onTitleClick}

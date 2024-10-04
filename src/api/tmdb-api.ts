@@ -345,7 +345,14 @@ export const getTrailers = async (
 
     return (
       data.results
-        .filter((res) => res.site.toLowerCase() === 'youtube')
+        .filter(
+          (res) =>
+            res.site.toLowerCase() === 'youtube' &&
+            (res.name.toLowerCase().includes('official trailer') ||
+              res.name.toLowerCase().includes('trailer') ||
+              res.name.toLowerCase().includes('season 1 trailer'))
+        )
+
         .map((res) => ({
           id: res.id,
           key: res.key,
