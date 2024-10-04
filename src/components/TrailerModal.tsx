@@ -97,7 +97,7 @@ export default function TrailerModal(props: Props) {
           </div>
           {show ? (
             <iframe
-              src={props.src as string}
+              src={`${props.src}?vq=hd720` as string}
               className="w-full h-[500px]"
               allowFullScreen
             ></iframe>

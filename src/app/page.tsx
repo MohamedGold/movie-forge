@@ -363,6 +363,7 @@ export default function Home() {
   const [topRatedMovie, setTopRatedMovie] = useState<Film[]>([])
 
   const [trailerModelSrc, setTrailerModelSrc] = useState('')
+  const [autoplay, setAutoplay] = useState(true) // Control autoplay
 
   const globalContext = useGlobalContext()
 
@@ -371,7 +372,13 @@ export default function Home() {
     setTrailerModelSrc(
       `https://www.youtube.com/embed/${trailers[0].key}?autoplay=0`
     )
+    setAutoplay(false) // Disable autoplay when trailer is played
   }
+
+    const handleModalClose = () => {
+      setTrailerModelSrc('')
+      setAutoplay(true) // Enable autoplay when modal is closed
+    }
 
   // حفظ البيانات في sessionStorage
   const saveDataToSession = (key: string, data: any) => {
@@ -478,16 +485,17 @@ export default function Home() {
     <div className="min-h-[calc(100vh_-_200px)]">
       {/* Trailer Modal */}
       <TrailerModal
-        onHide={() => setTrailerModelSrc('')}
+        onHide={handleModalClose}
         src={trailerModelSrc}
       ></TrailerModal>
 
       {/* trendings */}
       <Section className="py-0 " hidden={trendings.length === 0}>
         <Slider
+          key={autoplay ? 'slider-autoplay-true' : 'slider-autoplay-false'} // Force re-render when autoplay changes
           sliderKey="trendings-slider"
           className="slick-hero"
-          autoplay={true}
+          autoplay={autoplay}
           slidesToShow={1}
           slidesToScroll={1}
           dots={true}
