@@ -550,7 +550,7 @@ export default function Film(props: Props) {
                   releaseDate={film.releaseDate}
                 ></Card>
                 <p className="opacity-[0.9] text-sm text-center">
-                  {cast.characterName}
+                  {cast.characterName.split(' / ')[0]}
                 </p>
                 <p className="font-semibold text-center "> {cast.name}</p>
               </div>
