@@ -462,7 +462,7 @@ export default function Home() {
     if (savedScrollPosition) {
       setTimeout(() => {
         window.scrollTo(0, parseFloat(savedScrollPosition))
-      }, 500) // تأخير لمدة نصف ثانية
+      }, 200) // تأخير لمدة نصف ثانية
     }
 
     // حفظ موقع التمرير عند مغادرة الصفحة
