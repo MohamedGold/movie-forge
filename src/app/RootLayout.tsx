@@ -89,7 +89,7 @@ export default function RootLayout({
       {/* Scroll to Top Button */}
       <button
         onClick={scrollToTop}
-        className={`fixed bottom-10 right-10 mobile:bottom-[80px] z-[11] bg-primary text-white p-3 rounded-full shadow-md hover:bg-blue-700 transition-all duration-500 ${
+        className={`fixed bottom-10 right-10 mobile:bottom-[80px] z-[11] bg-primary text-white p-3 rounded-full shadow-md hover:bg-body transition-all duration-500 ${
           showScrollToTop
             ? 'opacity-100 translate-y-0'
             : 'opacity-0 translate-y-0'

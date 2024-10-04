@@ -200,7 +200,7 @@ export default function TrendingsHero(props: Props) {
 
   return (
     <div
-      className="h-[300px] min-h-[300px] relative flex items-center cursor-pointer"
+      className="h-[300px] min-h-[300px] rounded-lg relative flex items-center cursor-pointer"
       onMouseDown={handleMouseDown} // استدعاء عند الضغط للأسفل
       onMouseUp={handleMouseUp} // استدعاء عند رفع الضغط
       onMouseLeave={() => {

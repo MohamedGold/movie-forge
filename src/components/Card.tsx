@@ -283,7 +283,7 @@ export default function Card(props: Props) {
 
       {/* اسم الفيلم تحت الصورة */}
       <div className="py-1.5 text-center">
-        <p className="line-clamp-2 font-semibold">{props.title}</p>
+        <p className="line-clamp-1 font-semibold">{props.title}</p>
       </div>
     </div>
   )

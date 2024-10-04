@@ -11,9 +11,9 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        primary: '#100429', //#423F71
-        header: '#0B0205', //#292841
-        body: '#000', //#1C1B29
+        primary: '#1E1B29', //!main #100429 //#423F71
+        header: '#141218', //!main #0B0205  //#292841
+        body: '#0C0B10', //!main #000 //#1C1B29
       },
       screens: {
         mobile: {
@@ -21,8 +21,8 @@ const config: Config = {
         },
         vs: {
           min: '501px',
-          max:'640px'
-        }
+          max: '640px',
+        },
       },
       transitionProperty: {
         margin: 'margin',
