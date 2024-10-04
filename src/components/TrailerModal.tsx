@@ -23,6 +23,21 @@ export default function TrailerModal(props: Props) {
     if (props.src) setShow(true)
   }, [props.src])
 
+    useEffect(() => {
+      const handleKeyDown = (event: KeyboardEvent) => {
+        if (event.key === 'Escape') {
+          hide()
+        }
+      }
+
+      window.addEventListener('keydown', handleKeyDown)
+
+      return () => {
+        window.removeEventListener('keydown', handleKeyDown)
+      }
+    }, [
+    ])
+
   return (
     <div
       onClick={() => hide()}
@@ -84,6 +99,7 @@ export default function TrailerModal(props: Props) {
             <iframe
               src={props.src as string}
               className="w-full h-[500px]"
+              allowFullScreen
             ></iframe>
           ) : (
             ''
@@ -93,3 +109,11 @@ export default function TrailerModal(props: Props) {
     </div>
   )
 }
+
+
+
+
+
+
+
+

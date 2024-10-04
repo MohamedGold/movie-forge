@@ -515,7 +515,7 @@ export default function Home() {
                   }}
                 >
                   <MdPlayCircleOutline size={18} />
-                  <span>Play trailers</span>
+                  <span>Play Trailer</span>
                 </button>
               </div>
             ))

@@ -377,7 +377,7 @@ interface Props {
 export default function Film(props: Props) {
   const [trailerModelSrc, setTrailerModelSrc] = useState('')
   const playTrailer = async (key: string) => {
-    setTrailerModelSrc(`https://www.youtube.com/embed/${key}?autoplay=1`)
+    setTrailerModelSrc(`https://www.youtube.com/embed/${key}?autoplay=0`)
   }
 
   const { id } = useParams<any>()
