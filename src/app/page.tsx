@@ -197,7 +197,7 @@ export default function Home() {
         <Slider
           key={autoplay ? 'slider-autoplay-true' : 'slider-autoplay-false'} // Force re-render when autoplay changes
           sliderKey="trendings-slider"
-          className="slick-hero"
+          className="slick-hero mobile:mb-6 vs:mb-6"
           autoplay={autoplay}
           slidesToShow={1}
           slidesToScroll={1}

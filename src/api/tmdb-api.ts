@@ -78,53 +78,6 @@ export const getPopular = async (
   return []
 }
 
-// export const getTopRated = async (
-//   mediaType: MediaType,
-//   page = 1,
-//   genreId?: string // Add genreId as an optional parameter
-// ): Promise<{
-//   films: Film[],
-//   totalPages: number
-// }> => {
-//   try {
-//     const { data } = await axiosClient.get<
-//       any,
-//       AxiosResponse<{
-//         results: unknown[]
-//         total_pages: number
-//       }>
-//     >(`/${mediaType}/top_rated`, {
-//       params: {
-//         page,
-//         with_genres: genreId, // Pass genreId to the API if available
-//       },
-//     })
-
-//     return {
-//       films: data.results.map((val) => formatResult(val, mediaType)),
-//       totalPages: data.total_pages,
-//     }
-//   } catch (error) {
-//     console.error('Error fetching trendings:', error)
-//   }
-
-//   return {
-//     films: [],
-//     totalPages: 0,
-//   }
-// }
-
-
-
-
-
-
-
-
-
-
-
-
 export const getTopRated = async (
   mediaType: MediaType,
   page = 1,
@@ -189,7 +142,6 @@ export const getTopRated = async (
   }
 }
 
-
 export const search = async (
   query: string,
   page = 1
@@ -228,39 +180,6 @@ export const search = async (
     films: [],
   }
 }
-
-
-
-
-// export const getGenres = async (mediaType: MediaType): Promise<Genre[]> => {
-//   try {
-//     const { data } = await axiosClient.get<
-//       any,
-//       AxiosResponse<{
-//         genres: unknown[]
-//       }>
-//     >(`/genre/${mediaType}/list`)
-
-//     // Custom mapping for TV genres based on TMDB API response
-//     if (mediaType === 'tv') {
-//       return data.genres.map((genre) => {
-//         if (genre.name === 'Action')
-//           return { ...genre, name: 'Action & Adventure' }
-//         if (genre.name === 'Science Fiction')
-//           return { ...genre, name: 'Sci-Fi & Fantasy' }
-//         return genre
-//       }) as Genre[]
-//     }
-
-//     return data.genres as Genre[]
-//   } catch (error) {
-//     console.error(error)
-//   }
-
-//   return []
-// }
-
-
 
 export const getGenres = async (mediaType: MediaType): Promise<Genre[]> => {
   try {
@@ -422,41 +341,6 @@ export const getSeason = async (
   return null
 }
 
-// export const discover = async (
-//   mediaType: MediaType,
-//   page = 1
-// ): Promise<{
-//   films: Film[]
-//   totalPages: number
-// }> => {
-//   try {
-//     const { data } = await axiosClient.get<
-//       any,
-//       AxiosResponse<{
-//         total_pages: number
-//         results: unknown[]
-//       }>
-//     >(`/discover/${mediaType}`, {
-//       params: {
-//         page,
-//       },
-//     })
-
-//     return {
-//       films: data.results.map((val) => formatResult(val, mediaType)),
-//       totalPages: data.total_pages,
-//     }
-//   } catch (error) {
-//     console.error('Error fetching :', error)
-//   }
-
-//   return {
-//     films: [],
-//     totalPages: 0,
-//   }
-// }
-
-
 
 export const discover = async (
   mediaType: MediaType,
@@ -493,12 +377,4 @@ export const discover = async (
     totalPages: 0,
   }
 }
-
-
-
-
-
-
-
-
 
