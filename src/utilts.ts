@@ -42,7 +42,7 @@ export const tmdbImageSrc = (path: string) => {
   return `https://image.tmdb.org/t/p/original/${path}` 
 }
 
-export const mergeFilms = (movies: Film[], tvs: Film[], limit = 9) => {
+export const mergeFilms = (movies: Film[], tvs: Film[], limit = 11) => {
   const arrs: Film[] = []
 
   for (let i = 0; i < limit; i++) {

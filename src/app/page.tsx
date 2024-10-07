@@ -116,12 +116,49 @@ export default function Home() {
     }
   }
 
+  // useEffect(() => {
+  //   fetchTrending()
+  //   fetchInTheaters()
+  //   fetchPopular()
+  //   fetchTopRatedMovie()
+  //   fetchTopRatedTv()
+
+  //   // تأخير استعادة موقع التمرير للتأكد من اكتمال تحميل الصفحة
+  //   const savedScrollPosition = sessionStorage.getItem('home-scroll-position')
+  //   if (savedScrollPosition) {
+  //     setTimeout(() => {
+  //       window.scrollTo(0, parseFloat(savedScrollPosition))
+  //     }, 200) // تأخير لمدة نصف ثانية
+  //   }
+
+  //   // حفظ موقع التمرير عند مغادرة الصفحة
+  //   const saveScrollPosition = () => {
+  //     sessionStorage.setItem('home-scroll-position', `${window.scrollY}`)
+  //   }
+
+  //   window.addEventListener('scroll', saveScrollPosition) // استخدم scroll بدلاً من beforeunload
+  //   return () => {
+  //     window.removeEventListener('scroll', saveScrollPosition)
+  //   }
+  // }, []) // قم بتنفيذ هذا مرة واحدة عند تحميل المكون
+
   useEffect(() => {
-    fetchTrending()
-    fetchInTheaters()
-    fetchPopular()
-    fetchTopRatedMovie()
-    fetchTopRatedTv()
+    const fetchData = async () => {
+      try {
+        // انتظر حتى ينتهي fetchTrending أولاً
+        await fetchTrending()
+
+        // بعد انتهاء fetchTrending، نفذ باقي الفيتشات
+        fetchInTheaters()
+        fetchPopular()
+        fetchTopRatedMovie()
+        fetchTopRatedTv()
+      } catch (error) {
+        console.error('Error fetching data:', error)
+      }
+    }
+
+    fetchData()
 
     // تأخير استعادة موقع التمرير للتأكد من اكتمال تحميل الصفحة
     const savedScrollPosition = sessionStorage.getItem('home-scroll-position')
@@ -140,7 +177,7 @@ export default function Home() {
     return () => {
       window.removeEventListener('scroll', saveScrollPosition)
     }
-  }, []) // قم بتنفيذ هذا مرة واحدة عند تحميل المكون
+  }, [])
 
   const goToDetailPage = (film: Film) => {
     sessionStorage.setItem('home-scroll-position', `${window.scrollY}`)
