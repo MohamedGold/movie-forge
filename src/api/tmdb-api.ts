@@ -27,7 +27,7 @@ export const getTrendings = async (mediaType: MediaType): Promise<Film[]> => {
       AxiosResponse<{
         results: unknown[]
       }>
-    >(`/trending/${mediaType}/day`)
+    >(`/trending/${mediaType}/week`)
 
     return data.results.map((val) => formatResult(val, mediaType))
   } catch (error) {
